@@ -84,7 +84,7 @@ function getAI() {
         .then(data => {
             var transcript = data.transcripts[0].text;
             // Send transcript to the server
-            return fetch('https://youtube-transcript-8nb1.onrender.com/summarize', {
+            return fetch('/summarize', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -97,7 +97,7 @@ function getAI() {
             return response.json();
         })
         .then(summary => {
-            console.log(summary); // Log summary to console
+            document.getElementById("transcript").innerText = message;
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
