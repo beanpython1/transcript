@@ -84,7 +84,7 @@ function getAI() {
         .then(data => {
             var transcript = data.transcripts[0].text;
             // Send transcript to the server
-            return fetch('/summarize', {
+            return fetch('https://youtube-transcript-8nb1.onrender.com/summarize', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
