@@ -97,7 +97,7 @@ function getAI() {
             return response.json();
         })
         .then(summary => {
-            document.getElementById("transcript").innerText = message;
+            document.getElementById("transcript").innerText = JSON.stringify(summary);
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
