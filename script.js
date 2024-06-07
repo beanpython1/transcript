@@ -1,7 +1,7 @@
 document.getElementById("youtubeLink").addEventListener("input", function() {
     var youtubeLink = document.getElementById("youtubeLink").value.trim();
     var isDisabled = youtubeLink === "";
-    ["getTranscriptButton", "getPDFButton", "getVIDButton"].forEach(id => {
+    ["getTranscriptButton", "getPDFButton", "getVIDButton", "getAIButton"].forEach(id => {
         document.getElementById(id).disabled = isDisabled;
     });
 });
@@ -78,3 +78,29 @@ function sendURL(URL) {
 }
 
 
+function getAI() {
+    var youtubeLink = document.getElementById("youtubeLink").value;
+    fetchTranscript(youtubeLink)
+        .then(data => {
+            var transcript = data.transcripts[0].text;
+            // Send transcript to the server
+            return fetch('/summarize', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ transcript: transcript })
+            });
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(summary => {
+            console.log(summary); // Log summary to console
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            displayError("Error summarizing transcript");
+        });
+}
