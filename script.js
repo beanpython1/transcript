@@ -74,7 +74,7 @@ function getVID() {
 }
 
 function sendURL(URL) {
-    window.location.href = `http://localhost:4000/download?URL=${encodeURIComponent(URL)}`; // Encode the URL before sending it to the server
+    window.location.href = `https://youtube-transcript-8nb1.onrender.com/download?URL=${encodeURIComponent(URL)}`; // Encode the URL before sending it to the server
 }
 
 
