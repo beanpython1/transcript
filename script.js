@@ -97,10 +97,12 @@ function getAI() {
             return response.json();
         })
         .then(summary => {
-            document.getElementById("transcript").innerText = JSON.stringify(summary);
+            // Extract the summary text and set it as inner text
+            document.getElementById("transcript").innerText = summary.summary;
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
             displayError("Error summarizing transcript");
         });
 }
+
