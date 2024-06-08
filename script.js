@@ -1,9 +1,24 @@
 document.getElementById("youtubeLink").addEventListener("input", function() {
     var youtubeLink = document.getElementById("youtubeLink").value.trim();
     var isDisabled = youtubeLink === "";
-    ["getTranscriptButton", "getPDFButton", "getVIDButton", "getAIButton"].forEach(id => {
+    ["getTranscriptButton", "getPDFButton", "getVIDButton", "getAIButton", "copyButton"].forEach(id => {
         document.getElementById(id).disabled = isDisabled;
     });
+});
+document.getElementById("copyButton").addEventListener("click", function() {
+    var transcriptElement = document.getElementById("transcript");
+    var textToCopy = transcriptElement.innerText;
+
+    var tempTextArea = document.createElement("textarea");
+    tempTextArea.value = textToCopy;
+    document.body.appendChild(tempTextArea);
+
+    tempTextArea.select();
+    document.execCommand("copy");
+
+    document.body.removeChild(tempTextArea);
+
+    alert("Copied the transcript/summary to clipboard!");
 });
 
 function fetchTranscript(youtubeLink) {
@@ -83,8 +98,8 @@ function getAI() {
     fetchTranscript(youtubeLink)
         .then(data => {
             var transcript = data.transcripts[0].text;
-            var isTrimmed = transcript.length > 5250;
-            var trimmedTranscript = isTrimmed ? transcript.slice(0, 5250) : transcript;
+            var isTrimmed = transcript.length > 5230;
+            var trimmedTranscript = isTrimmed ? transcript.slice(0, 5230) : transcript;
             console.log(trimmedTranscript)
 
             return fetch('https://youtube-transcript-8nb1.onrender.com/summarize', {
@@ -97,7 +112,7 @@ function getAI() {
                 if (!response.ok) throw new Error('Network response was not ok');
                 return response.json();
             }).then(summary => {
-                var summaryText = isTrimmed ? summary.summary + ' (Only summarised first 5250 characters)' : summary.summary;
+                var summaryText = isTrimmed ? summary.summary + ' (Only summarised first 5230 characters)' : summary.summary;
                 document.getElementById("transcript").innerText = summaryText;
             });
         })
