@@ -83,8 +83,9 @@ function getAI() {
     fetchTranscript(youtubeLink)
         .then(data => {
             var transcript = data.transcripts[0].text;
-            var isTrimmed = transcript.length > 7480;
-            var trimmedTranscript = isTrimmed ? transcript.slice(0, 7480) : transcript;
+            var isTrimmed = transcript.length > 5250;
+            var trimmedTranscript = isTrimmed ? transcript.slice(0, 5250) : transcript;
+            console.log(trimmedTranscript)
 
             return fetch('https://youtube-transcript-8nb1.onrender.com/summarize', {
                 method: 'POST',
@@ -96,7 +97,7 @@ function getAI() {
                 if (!response.ok) throw new Error('Network response was not ok');
                 return response.json();
             }).then(summary => {
-                var summaryText = isTrimmed ? summary.summary + ' (Only summarised first 7480 characters)' : summary.summary;
+                var summaryText = isTrimmed ? summary.summary + ' (Only summarised first 5250 characters)' : summary.summary;
                 document.getElementById("transcript").innerText = summaryText;
             });
         })
