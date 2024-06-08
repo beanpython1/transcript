@@ -98,9 +98,10 @@ function getAI() {
     fetchTranscript(youtubeLink)
         .then(data => {
             var transcript = data.transcripts[0].text;
-            var cleanedTranscript = transcript.replace(/\[ __ \]/g, ''); // Remove [ __ ]
+            var cleanedTranscript = transcript.replace(/\[\s*__\s*\]/g, ''); // Remove [ __ ]
             var isTrimmed = cleanedTranscript.length > 5200;
             var trimmedTranscript = isTrimmed ? cleanedTranscript.slice(0, 5200) : cleanedTranscript;
+            console.log(trimmedTranscript)
 
             return fetch('https://youtube-transcript-8nb1.onrender.com/summarize', {
                 method: 'POST',
