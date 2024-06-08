@@ -98,9 +98,9 @@ function getAI() {
     fetchTranscript(youtubeLink)
         .then(data => {
             var transcript = data.transcripts[0].text;
-            var isTrimmed = transcript.length > 5200;
-            var trimmedTranscript = isTrimmed ? transcript.slice(0, 5200) : transcript;
-            console.log(trimmedTranscript)
+            var cleanedTranscript = transcript.replace(/\[ __ \]/g, ''); // Remove [ __ ]
+            var isTrimmed = cleanedTranscript.length > 5200;
+            var trimmedTranscript = isTrimmed ? cleanedTranscript.slice(0, 5200) : cleanedTranscript;
 
             return fetch('https://youtube-transcript-8nb1.onrender.com/summarize', {
                 method: 'POST',
@@ -121,6 +121,7 @@ function getAI() {
             displayError("Error summarizing transcript");
         });
 }
+
 
 function getAIText() {
     var userPrompt = prompt("Enter AI Prompt: ");
