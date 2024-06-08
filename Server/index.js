@@ -21,7 +21,7 @@ app.post('/summarize', async (req, res) => {
         // Get transcript from request body
         const { transcript } = req.body;
         // Summarize the transcript using Hercai
-        const summary = await herc.question({ content: 'summarize this for notetaking, make it detailed and long:' + transcript });
+        const summary = await herc.question({ content: 'summarize this for notetaking:' + transcript });
         // Send the summary back to the client
         res.json({ summary: summary.reply });
     } catch (error) {
@@ -43,6 +43,20 @@ app.get('/download', (req, res) => {
         filter: 'audioandvideo',
         quality: 'highest'
     }).pipe(res);
+});
+
+app.post('/prompt', async (req, res) => {
+    try {
+        // Get prompt from request body
+        const { prompt } = req.body;
+        // Generate a response using Hercai
+        const reply = await herc.question({ content: prompt });
+        // Send the reply back to the client
+        res.json({ reply: reply.reply });
+    } catch (error) {
+        console.error('Error processing AI prompt:', error);
+        res.status(500).json({ error: 'Error processing AI prompt' });
+    }
 });
 
 const PORT = 4000;
