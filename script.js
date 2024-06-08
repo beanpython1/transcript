@@ -121,3 +121,29 @@ function getAI() {
             displayError("Error summarizing transcript");
         });
 }
+
+function getAIText() {
+    var userPrompt = prompt("Enter AI Prompt: ");
+
+    if (userPrompt) {
+        fetch('https://youtube-transcript-8nb1.onrender.com/prompt', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ prompt: userPrompt })
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            var reply = data.reply; // Assuming the server response has a 'reply' field
+            document.getElementById("transcript").innerText = reply;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            displayError("Error processing AI prompt");
+        });
+    }
+}
