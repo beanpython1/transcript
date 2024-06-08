@@ -21,7 +21,7 @@ app.post('/summarize', async (req, res) => {
         // Get transcript from request body
         const { transcript } = req.body;
         // Summarize the transcript using Hercai
-        const summary = await herc.question({ content: 'summarize this YT vid for notetaking keep it long:' + transcript });
+        const summary = await herc.question({ content: 'summarize this YT vid for notetaking keep it long' + transcript });
         // Send the summary back to the client
         res.json({ summary: summary.reply });
     } catch (error) {
