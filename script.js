@@ -83,26 +83,25 @@ function getAI() {
     fetchTranscript(youtubeLink)
         .then(data => {
             var transcript = data.transcripts[0].text;
-            // Send transcript to the server
+            var isTrimmed = transcript.length > 7480;
+            var trimmedTranscript = isTrimmed ? transcript.slice(0, 7480) : transcript;
+
             return fetch('https://youtube-transcript-8nb1.onrender.com/summarize', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ transcript: transcript })
+                body: JSON.stringify({ transcript: trimmedTranscript })
+            }).then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            }).then(summary => {
+                var summaryText = isTrimmed ? summary.summary + ' (Only summarised first 7480 characters)' : summary.summary;
+                document.getElementById("transcript").innerText = summaryText;
             });
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-        })
-        .then(summary => {
-            // Extract the summary text and set it as inner text
-            document.getElementById("transcript").innerText = summary.summary;
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
             displayError("Error summarizing transcript");
         });
 }
-
