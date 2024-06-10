@@ -88,9 +88,19 @@ function getVID() {
     sendURL(URLInput); // Call sendURL with the input value directly, without calling .value again
 }
 
+function getMP3() {
+    var URLInput = document.getElementById("youtubeLink").value;
+    sendMP3(URLInput); // Call sendMP3 with the input value directly, without calling .value again
+}
+
+function sendMP3(URL) {
+    window.location.href = `https://youtube-transcript-8nb1.onrender.com/downloadmp3?URL=${encodeURIComponent(URL)}`; // Encode the URL before sending it to the server
+}
+
 function sendURL(URL) {
     window.location.href = `https://youtube-transcript-8nb1.onrender.com/download?URL=${encodeURIComponent(URL)}`; // Encode the URL before sending it to the server
 }
+
 
 
 function getAI() {
