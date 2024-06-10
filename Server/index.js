@@ -45,6 +45,26 @@ app.get('/download', (req, res) => {
     }).pipe(res);
 });
 
+// Endpoint to download MP3 from YouTube video
+app.get('/downloadmp3', async (req, res) => {
+    try {
+        const URL = req.query.URL;
+        if (!URL) {
+            return res.status(400).send('No URL provided');
+        }
+        // Download the audio from the YouTube video
+        res.header('Content-Disposition', 'attachment; filename="audio.mp3"');
+        ytdl(URL, {
+            format: 'mp3',
+            filter: 'audioonly',
+            quality: 'highestaudio'
+        }).pipe(res);
+    } catch (error) {
+        console.error('Error downloading MP3:', error);
+        res.status(500).json({ error: 'Error downloading MP3' });
+    }
+});
+
 app.post('/prompt', async (req, res) => {
     try {
         // Get prompt from request body
