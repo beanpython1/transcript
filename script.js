@@ -1,7 +1,7 @@
 document.getElementById("youtubeLink").addEventListener("input", function() {
     var youtubeLink = document.getElementById("youtubeLink").value.trim();
     var isDisabled = youtubeLink === "";
-    ["getTranscriptButton", "getPDFButton", "getVIDButton", "getAIButton", "copyButton"].forEach(id => {
+    ["getTranscriptButton", "getPDFButton", "getVIDButton", "getAIButton", "copyButton", "getMP3Button"].forEach(id => {
         document.getElementById(id).disabled = isDisabled;
     });
 });
