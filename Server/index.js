@@ -41,7 +41,7 @@ app.get('/download', (req, res) => {
     ytdl(URL, {
         format: 'mp4',
         filter: 'audioandvideo',
-        quality: 'highestvideo'
+        quality: '137'
     }).pipe(res);
 });
 
