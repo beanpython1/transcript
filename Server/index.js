@@ -36,18 +36,33 @@ app.get('/download', async (req, res) => {
         if (!URL) {
             return res.status(400).send('No URL provided');
         }
-        // Download the YouTube video
+
+        // Get video info
+        const info = await ytdl.getInfo(URL);
+
+        // Find the format with the highest quality
+        const format = info.formats.find(format => format.hasVideo && format.hasAudio);
+
+        if (!format) {
+            return res.status(500).send('No video format found');
+        }
+
+        // Download the video
         res.header('Content-Disposition', 'attachment; filename="video.mp4"');
-        await ytdl(URL, {
-            format: 'mp4',
-            filter: 'audioandvideo',
-            quality: 'highest'
-        }).pipe(res);
+        const videoStream = ytdl(URL, { format: format });
+
+        videoStream.pipe(res);
+
     } catch (error) {
-        console.error('Error downloading video:', error);
-        res.status(500).json({ error: 'Error downloading video' });
+        console.error('Error:', error);
+        res.status(500).send('An error occurred');
     }
 });
+
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+});
+
 
 // Endpoint to download MP3 from YouTube video
 app.get('/downloadmp3', async (req, res) => {
