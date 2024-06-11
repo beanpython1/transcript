@@ -1,4 +1,3 @@
-// Server-side Node.js with Express
 const express = require('express');
 const cors = require('cors');
 const ytdl = require('ytdl-core');
@@ -31,18 +30,23 @@ app.post('/summarize', async (req, res) => {
 });
 
 // Endpoint to download YouTube video
-app.get('/download', (req, res) => {
-    var URL = req.query.URL;
-    if (!URL) {
-        return res.status(400).send('No URL provided');
+app.get('/download', async (req, res) => {
+    try {
+        const URL = req.query.URL;
+        if (!URL) {
+            return res.status(400).send('No URL provided');
+        }
+        // Download the YouTube video
+        res.header('Content-Disposition', 'attachment; filename="video.mp4"');
+        await ytdl(URL, {
+            format: 'mp4',
+            filter: 'audioandvideo',
+            quality: 'highest'
+        }).pipe(res);
+    } catch (error) {
+        console.error('Error downloading video:', error);
+        res.status(500).json({ error: 'Error downloading video' });
     }
-    // Download the YouTube video
-    res.header('Content-Disposition', 'attachment; filename="video.mp4"');
-    ytdl(URL, {
-        format: 'mp4',
-        filter: 'audioandvideo',
-        quality: '137'
-    }).pipe(res);
 });
 
 // Endpoint to download MP3 from YouTube video
@@ -54,7 +58,7 @@ app.get('/downloadmp3', async (req, res) => {
         }
         // Download the audio from the YouTube video
         res.header('Content-Disposition', 'attachment; filename="audio.mp3"');
-        ytdl(URL, {
+        await ytdl(URL, {
             format: 'mp3',
             filter: 'audioonly',
             quality: 'highestaudio'
