@@ -94,11 +94,11 @@ function getMP3() {
 }
 
 function sendMP3(URL) {
-    window.location.href = `https://youtube-transcript-8nb1.onrender.com/downloadmp3?URL=${encodeURIComponent(URL)}`; // Encode the URL before sending it to the server
+    window.location.href = `https://transcript-r2z3.onrender.com/downloadmp3?URL=${encodeURIComponent(URL)}`; // Encode the URL before sending it to the server
 }
 
 function sendURL(URL) {
-    window.location.href = `https://youtube-transcript-8nb1.onrender.com/download?URL=${encodeURIComponent(URL)}`; // Encode the URL before sending it to the server
+    window.location.href = `https://transcript-r2z3.onrender.com/download?URL=${encodeURIComponent(URL)}`; // Encode the URL before sending it to the server
 }
 
 
@@ -113,7 +113,7 @@ function getAI() {
             var trimmedTranscript = isTrimmed ? cleanedTranscript.slice(0, 5100) : cleanedTranscript;
             console.log(trimmedTranscript)
 
-            return fetch('https://youtube-transcript-8nb1.onrender.com/summarize', {
+            return fetch('https://transcript-r2z3.onrender.com/summarize', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -138,7 +138,7 @@ function getAIText() {
     var userPrompt = prompt("Enter AI Prompt: ");
 
     if (userPrompt) {
-        fetch('https://youtube-transcript-8nb1.onrender.com/prompt', {
+        fetch('https://transcript-r2z3.onrender.com/prompt', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
