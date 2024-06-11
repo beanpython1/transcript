@@ -1,3 +1,13 @@
+body {
+    background-image: url('background.jpg');
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
 .container {
     position: fixed;
     top: 0;
@@ -5,6 +15,12 @@
     transform: translateX(-50%);
     text-align: center;
 }
+
+h1 {
+    color: red;
+    font-size: 2em;
+}
+
 #transcript {
     margin-top: 60px;
     padding: 20px;
@@ -12,15 +28,14 @@
     background-color: #f1f1f1;
     border-radius: 15px;
     color: #333;
-    font-family: Arial, sans-serif;
     width: 80%;
     max-width: 800px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     min-height: 350px;
-    overflow-y: scroll; /* Change overflow-y to scroll */
+    max-height: 450px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin-left: auto;
     margin-right: auto;
-    max-height: 450px;
 }
 
 input[type="text"] {
@@ -29,6 +44,7 @@ input[type="text"] {
     background-color: red;
     border: 2px white dotted;
     border-radius: 5px;
+    color: white;
 }
 
 ::placeholder {
@@ -42,16 +58,7 @@ button {
     color: white;
     border-radius: 15px;
     border: 1px black solid;
-}
-
-body {
-    background-image: url('background.jpg');
-    background-size: 100%;
-}
-
-h1 {
-    color: red; /* Green heading color */
-    font-family: Arial, sans-serif;
+    font-size: 1em;
 }
 
 button:hover {
@@ -60,14 +67,14 @@ button:hover {
 
 button:disabled {
     cursor: default;
-    background-color: #666; /* Dark gray background color */
-    color: #ccc; /* Light gray text color */
+    background-color: #666;
+    color: #ccc;
 }
+
 #getAI {
     position: fixed;
-    margin: auto;
-    left: 41%;
-    bottom: -100px !important;
+    left: 50%;
+    bottom: -5em;
+    transform: translateX(-50%);
     z-index: 9999;
-    display: inline-block;
 }
