@@ -49,7 +49,7 @@ input[type="text"] {
     color: white;
 }
 
-button {
+#getPDFButton, #getTranscriptButton, #getVIDButton, #getMP3Button, #getAIButton, #copyButton {
     margin-top: 10px;
     background-color: red;
     padding: 5px 10px;
@@ -72,12 +72,36 @@ button:disabled {
 #getAI {
     position: fixed;
     left: 50%;
-    bottom: -8em;
+    top: 11.5em;
     transform: translateX(-50%);
     z-index: 9999;
+    background-color: red;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 15px;
+    border: 1px black solid;
+    font-size: 1em;
 }
 
 button:enabled:active {
     background-color: darkred;
     color: lightgrey;
 }
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid red;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: fixed;
+    left: 40%;
+    top: 52%;
+    display: none;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
