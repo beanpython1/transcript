@@ -51,7 +51,7 @@ input[type="text"] {
     color: white;
 }
 
-#getPDFButton, #getTranscriptButton, #getVIDButton, #getMP3Button, #getAIButton, #copyButton {
+button {
     margin-top: 10px;
     background-color: red;
     padding: 5px 10px;
