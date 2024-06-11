@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>YouTube Transcript and Tools</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -11,16 +12,16 @@
     <div class="container">
         <h1>YouTube Transcript Retriever</h1>
         <input type="text" autocomplete="off" id="youtubeLink" placeholder="Enter YouTube video link" required>
-        <button id="getTranscriptButton" onclick="getTranscript()" disabled>Get Transcript</button>
-        <button id="getPDFButton" onclick="getPDF()" disabled>Get PDF</button>
-        <button id="getVIDButton" onclick="getVID()" disabled>Download Video</button>
-        <button id="getMP3Button" onclick="getMP3()" disabled>Download Audio</button>
-        <button id="getAIButton" onclick="getAI()" disabled>GPT-4 Summary</button>
-        <button id="copyButton" disabled>Copy Transcript</button>
+        <button id="getTranscriptButton" onclick="getTranscript()" disabled><i class="fa fa-file-text-o"></i> Get Transcript</button>
+        <button id="getPDFButton" onclick="getPDF()" disabled><i class="fa fa-file-pdf-o"></i> Get PDF</button>
+        <button id="getVIDButton" onclick="getVID()" disabled><i class="fa fa-file-movie-o"></i> Download Video</button>
+        <button id="getMP3Button" onclick="getMP3()" disabled><i class="fa fa-file-audio-o"></i> Download Audio</button>
+        <button id="getAIButton" onclick="getAI()" disabled><i class="fa fa-cogs"></i> GPT-4 Summary</button>
+        <button id="copyButton" disabled><i class="fa fa-copy"></i> Copy Transcript</button>
         <div class="loader" id="loader"></div>
         <div id="transcript"></div>
     </div>
-    <button id="getAI" onclick="getAIText()">Custom AI Prompt</button>
+    <button id="getAI" onclick="getAIText()"><i class="fa fa-cogs"></i> Custom AI Prompt</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 </body>
