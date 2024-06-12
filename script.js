@@ -154,9 +154,9 @@ function getAI() {
 
 function getAIText() {
     var userPrompt = prompt("Enter AI Prompt: ");
-    showLoader();
 
     if (userPrompt) {
+        showLoader();
         fetch('https://transcript-r2z3.onrender.com/prompt', {
             method: 'POST',
             headers: {
